@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lego.css">
+</head>
+<body>
+    <div style="display: flex;gap: 20px;justify-content: end;">
+        <div class="sidebar" id="sidebar">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+            <a href="index.html">Home</a>
+            <a href="signup.html">Sign up</a>
+            <a href="login.html">Login</a>
+            <a href="secondpage.html">AniShuffle</a>
+        </div>
+        
+        <div onclick="toggleSidebar()" style="cursor: pointer;">
+            <h1 style="color:black;"><span class="purple">Ani</span>Shuffle</h1>
+        </div>
+    </div>  
+    <div class="container">
+        <div class="content">
+            <h1>Our Future Plans which<br> we plan to undertake</h1>
+            <h1 style="color: rgba(120, 120, 120, 1);">Create, explore, and bring your ideas to life.</h1>
+            <button>Learn more ></button>
+        </div>
+        <div>
+            <img src="frame.png" alt="Illustration">
+        </div>
+    </div>
+    
+  =
+    <div class="container">
+        <img src="legos/Frame 1000003188.png" class="lego">
+        <img src="legos/Frame 1000003189.png" class="lego">
+        <img src="legos/Frame 1000003190.png" class="lego">
+        <img src="legos/Frame 1000003191.png" class="lego">
+    </div>
+    <div class="container">
+        <img src="films/image 117.png" class="film">
+        <img src="films/image 118.png" class="film">
+        <img src="films/image 26.png" class="film">
+        <img src="films/image 8.png" class="film">
+    </div>
+Z    
+
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px"; 
+            } else {
+                sidebar.style.left = "0px"; 
+            }
+        }
+
+        
+        const films = document.querySelectorAll('.film');
+        const legos = document.querySelectorAll('.lego');
+
+        function addHoverEffect(elements) {
+            elements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.transform = 'scale(1.1)';
+                    element.style.transition = 'transform 0.3s ease';
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    element.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        addHoverEffect(films);
+        addHoverEffect(legos);
+    </script>
+</body>
+</html>

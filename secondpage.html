@@ -1,184 +1,234 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аниме сайт</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Movie Carousel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.dark-theme {
-            background-color: #333;
-            color: #f4f4f4;
-        }
-
-        header {
-            background-color: #ff6f61;
-            color: white;
-            padding: 20px;
+      body {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: #111;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .carousel {
+        width: 70%;
+        height: 400px;
+      }
+      .carousel .carousel-item {
+        width: 250px;
+        transition: transform 0.1s;
+      }
+      .carousel .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .carousel-item.active {
+        transform: scale(1.2);
+        box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
+      }
+      .spin-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #b451d7;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+      }
+      .spin-button:hover {
+        background-color: #8a2be2;
+      }
+      .result-message {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      .result-message.show {
+        opacity: 1;
+      }
+      @media screen and (max-width:480px) {
+        h1{
+            font-size: 30px;
             text-align: center;
+            font-weight: 600;
         }
+      }        .sidebar {
+    position: fixed;
+    top: 0;
+    left: -350px; 
+    width: 250px;
+    height: 100%;
+    background: #222;
+    color: white;
+    transition: left 0.3s ease-in-out;
+    padding: 20px;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
 
-        .dark-theme .container {
-            background-color: #444;
-            color: #f4f4f4;
-        }
+.sidebar a:hover {
+    background: #444;
+}
 
-        .anime-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .anime-card:hover {
-            transform: scale(1.02);
-        }
-
-        .trailer-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .dark-theme .popup-content {
-            background-color: #444;
-            color: #f4f4f4;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #ff4a3d;
-        }
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+.purple{
+    background-color: purple;
+}
     </style>
 </head>
 <body>
-    <header>
-        <h1>Добро пожаловать на аниме сайт!</h1>
-        <button id="theme-toggle">Переключить тему</button>
-    </header>
+    <div style="display: flex;justify-content: start;">
+    <div style="display: flex;gap: 20px;">
+        
+        <div class="sidebar" id="sidebar">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+            <a href="index.html">Home</a>
+            <a href="signup.html">Sign up</a>
+            <a href="login.html">Login</a>
+            <a href="secondpage.html">AniShuffle</a>
+        </div>
+        
+  
+        <div onclick="toggleSidebar()" style="cursor: pointer;">
+            <h1 style="color: white;"><span class="purple">Ani</span>Shuffle</h1>
+        </div>
+    
+        
 
-    <div class="container">
-        <div id="random-anime">
-            <h2>Аниме дня:</h2>
-            <p><strong>Название:</strong> <span id="anime-title"></span></p>
-            <p><strong>Жанр:</strong> <span id="anime-genre"></span></p>
-            <p><strong>Рейтинг:</strong> <span id="anime-rating"></span></p>
-        </div>
-
-        <h2>Популярные аниме</h2>
-        <div class="anime-card" onclick="showTrailer('dQw4w9WgXcQ')">
-            <h3>Наруто</h3>
-            <p>Жанр: Сёнэн</p>
-            <p>Рейтинг: 8.5</p>
-        </div>
-        <div class="anime-card" onclick="showTrailer('dQw4w9WgXcQ')">
-            <h3>Атака титанов</h3>
-            <p>Жанр: Драма, Экшен</p>
-            <p>Рейтинг: 9.0</p>
-        </div>
+</div>  
+</div>
+    <h1 style="color: white;">Which anime will You watch?</h1>
+    <div class="carousel">
+      <a class="carousel-item" href="#one!"
+        ><img src="image 29.png" alt=""
+      /></a>
+      <a class="carousel-item" href="#two!"
+        ><img src="image 62.png" alt=""
+      /></a>
+      <a class="carousel-item" href="#three!"
+        ><img src="MacBook Pro 16_ - 4.png" alt=""
+      /></a>
+      <a class="carousel-item" href="#four!"
+        ><img src="image 31.png" alt=""
+      /></a>
+      <a class="carousel-item" href="#four!"
+        ><img src="image 36.png" alt=""
+      /></a>
+      <a class="carousel-item" href="#four!"
+        ><img src="MacBook Pro 16_ - 4.png" alt=""
+      /></a>
+      <a class="carousel-item" href="#four!"
+        ><img src="MacBook Pro 16_ - 6.png" alt=""
+      /></a>
+      <a class="carousel-item" href="#four!"
+      ><img src="image 31.png" alt=""
+    /></a>
+    <a class="carousel-item" href="#four!"
+    ><img src="add (2).png" alt=""
+  /></a>
+  <a class="carousel-item" href="#four!"
+    ><img src="image 38.png" alt=""
+  /></a>
+  <a class="carousel-item" href="#four!"
+    ><img src="image 60.png" alt=""
+  /></a>
+  <a class="carousel-item" href="#four!"
+    ><img src="image 63.png" alt=""
+  /></a>
+  <a class="carousel-item" href="#four!"
+    ><img src="image 51.png" alt=""
+  /></a>
+  <a class="carousel-item" href="#four!"
+    ><img src="MacBook Pro 16_ - 6 (1).png" alt=""
+  /></a>
+  <a class="carousel-item" href="#four!"
+    ><img src="MacBook Pro 16_ - 5.png" alt=""
+  /></a>
     </div>
 
+
+    <button class="spin-button">Try it</button>
+
+
+    <div class="result-message" id="resultMessage"></div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        // Массив с аниме
-        const animeList = [
-            { title: "Наруто", genre: "Сёнэн", rating: 8.5 },
-            { title: "Атака титанов", genre: "Драма, Экшен", rating: 9.0 },
-            { title: "Моя геройская академия", genre: "Сёнэн, Супергерои", rating: 8.7 },
-            { title: "Самурай Чамплу", genre: "Приключения, Комедия", rating: 8.3 },
-            { title: "Тетрадь смерти", genre: "Триллер, Мистика", rating: 8.8 }
-        ];
-
-        // Функция для выбора случайного аниме
-        function getRandomAnime() {
-            const randomIndex = Math.floor(Math.random() * animeList.length);
-            return animeList[randomIndex];
-        }
-
-        // Отображение случайного аниме на странице
-        function displayRandomAnime() {
-            const anime = getRandomAnime();
-            document.getElementById('anime-title').textContent = anime.title;
-            document.getElementById('anime-genre').textContent = anime.genre;
-            document.getElementById('anime-rating').textContent = anime.rating;
-        }
-
-        // Переключение темы
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-            localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
+      $(document).ready(function () {
+        const carousel = $(".carousel").carousel({
+          dist: -100,
+          shift: 50,
+          padding: 20,
+          indicators: false,
+          numVisible: 20,
         });
 
-        // При загрузке страницы
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-theme');
-        }
+        const spinButton = document.querySelector('.spin-button');
+        const resultMessage = document.getElementById('resultMessage');
 
-        // Показ трейлера
-        function showTrailer(videoId) {
-            const popup = document.createElement('div');
-            popup.className = 'trailer-popup';
-            popup.innerHTML = `
-                <div class="popup-content">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-                    <button onclick="closeTrailer()">Закрыть</button>
-                </div>
-            `;
-            document.body.appendChild(popup);
-        }
+        spinButton.addEventListener('click', () => {
+         
+          const spinDuration = 1000; 
+          const spinInterval = 100; 
+          const totalSpins = spinDuration / spinInterval;
 
-        function closeTrailer() {
-            const popup = document.querySelector('.trailer-popup');
-            if (popup) {
-                popup.remove();
+          let spinCount = 0;
+          const spinIntervalId = setInterval(() => {
+            carousel.carousel('next');
+            spinCount++;
+            if (spinCount >= totalSpins) {
+              clearInterval(spinIntervalId);
+
+             
+              const items = document.querySelectorAll('.carousel-item');
+              const randomIndex = Math.floor(Math.random() * items.length);
+              const selectedItem = items[randomIndex];
+
+            
+              setTimeout(() => {
+                carousel.carousel('set', randomIndex);
+                resultMessage.textContent = ` ${selectedItem.querySelector('img').alt}`;
+                resultMessage.classList.add('show');
+              }, 500);
             }
-        }
-
-        // Инициализация
-        window.onload = displayRandomAnime;
+          }, spinInterval);
+        });
+      });
+      function toggleSidebar() {
+    let sidebar = document.getElementById("sidebar");
+    if (sidebar.style.left === "0px") {
+        sidebar.style.left = "-250px"; 
+    } else {
+        sidebar.style.left = "0px"; 
+    }
+}
     </script>
 </body>
 </html>

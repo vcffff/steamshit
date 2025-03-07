@@ -1,39 +1,14 @@
-const video = document.getElementById("video");
-const playPause = document.getElementById("playPause");
-const progress = document.getElementById("progress");
-const volume = document.getElementById("volume");
-const fullscreen = document.getElementById("fullscreen");
+document.getElementById('signup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-// Кнопка Play/Pause
-playPause.addEventListener("click", () => {
-    if (video.paused) {
-        video.play();
-        playPause.textContent = "⏸";
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (username && email && password) {
+        alert(`Welcome, ${username}! Your account has been created.`);
+        // Здесь можно добавить логику отправки данных на сервер
     } else {
-        video.pause();
-        playPause.textContent = "▶";
-    }
-});
-
-// Ползунок прогресса
-video.addEventListener("timeupdate", () => {
-    progress.value = (video.currentTime / video.duration) * 100;
-});
-
-progress.addEventListener("input", () => {
-    video.currentTime = (progress.value / 100) * video.duration;
-});
-
-// Громкость
-volume.addEventListener("input", () => {
-    video.volume = volume.value;
-});
-
-// Полноэкранный режим
-fullscreen.addEventListener("click", () => {
-    if (!document.fullscreenElement) {
-        video.requestFullscreen();
-    } else {
-        document.exitFullscreen();
+        alert('Please fill in all fields.');
     }
 });

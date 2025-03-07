@@ -35,9 +35,9 @@ async function fetchAnime() {
             div.appendChild(info);
             container.appendChild(div);
 
-            // Добавляем обработчик клика на карточку аниме
+            
             div.addEventListener('click', () => {
-                // Сохраняем данные о выбранном аниме в localStorage
+                
                 const selectedAnime = {
                     image: anime.attributes.posterImage.medium,
                  
@@ -48,11 +48,11 @@ async function fetchAnime() {
                 };
                 localStorage.setItem('selectedAnime', JSON.stringify(selectedAnime));
 
-                // Перенаправляем на страницу с деталями
+               
                 window.location.href = 'details.html';
             });
 
-            // Анимация появления
+      
             setTimeout(() => {
                 div.classList.add("show");
             }, index * 200);
