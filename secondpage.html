@@ -9,14 +9,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Darker+Grotesque:wght@300..900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Luckiest+Guy&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titan+One&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
       body {
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-family:Titillium Web;
         background-color: #111;
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        height: 100vh;
+      
         margin: 0;
       }
       .carousel {
@@ -67,6 +68,17 @@
             text-align: center;
             font-weight: 600;
         }
+        .jojo{
+          justify-content: center;
+        }
+        .bobo{
+          display: flex;
+          justify-content: center;
+        }
+        img{width: 80%;}
+        .negr{
+        font-size: 120%;
+        }
       }        .sidebar {
     position: fixed;
     top: 0;
@@ -77,6 +89,10 @@
     color: white;
     transition: left 0.3s ease-in-out;
     padding: 20px;
+}
+.negr{
+  font-size:50px;
+  text-align: center;
 }
 
 .sidebar a {
@@ -100,18 +116,31 @@
 .purple{
     background-color: purple;
 }
+button:hover{
+  opacity: 0.6;
+  cursor: pointer;
+}
+textarea{
+  width: 600px;
+  height: 400px;
+  font-size: 40px;
+  font-family: Montserrat;
+}
+
     </style>
 </head>
 <body>
+ 
     <div style="display: flex;justify-content: start;">
     <div style="display: flex;gap: 20px;">
         
         <div class="sidebar" id="sidebar">
             <button class="close-btn" onclick="toggleSidebar()">×</button>
             <a href="index.html">Home</a>
-            <a href="signup.html">Sign up</a>
-            <a href="login.html">Login</a>
+            <a href="lego.html">AniTop</a>
+            <a href="login.html">My profile</a>
             <a href="secondpage.html">AniShuffle</a>
+            <a href="Paralax.html">Our slogan</a>
         </div>
         
   
@@ -122,8 +151,26 @@
         
 
 </div>  
+
+
 </div>
-    <h1 style="color: white;">Which anime will You watch?</h1>
+
+<div><h1 class="negr" style="color: white;">Select right genre is also<span style="color: red;">  important </span></h1>
+
+<div style="display: flex;gap: 30px;flex-wrap: wrap;" class="jojo">
+  <div class="bobo"><img style="border-radius: 7%;" src="films/image 118.png" alt=""></div>
+<div class="bobo"><img style="border-radius: 7%;" src="films/image 26.png" alt=""></div>
+<div class="bobo"><img  style="border-radius: 7%;" src="films/image 8.png" alt=""></div>
+<div class="bobo"><img style="border-radius: 7%;" src="films/image 117.png" alt=""></div>
+</div></div>
+<h1 style="color: white;font-family: Montserrat;">Tell us about your fav genre</h1>
+<div style="margin-top: 2%; display: flex;justify-self:center;">
+
+  <div style="width:50%;display: flex;justify-content: center;align-items: center;"><img src="image 62.png" alt="" width="90%"></div>
+  <div style="display: flex;justify-content: center;align-items: center;"><textarea style="color: white; " name=""   id=""></textarea></div>
+</div>
+<div><div><button  onclick="maga()" style="background-color: purple;border-radius: 9%;margin-top: 20%;color: white;font-size: 30px;font-family: Montserrat;">sumbit</button></div></div>
+    <h1 style="color: white;">Let us help you!</h1>
     <div class="carousel">
       <a class="carousel-item" href="#one!"
         ><img src="image 29.png" alt=""
@@ -228,6 +275,10 @@
     } else {
         sidebar.style.left = "0px"; 
     }
+}
+function maga(){
+  alert('thank a lot!')
+  window.location.reload()
 }
     </script>
 </body>
