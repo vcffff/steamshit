@@ -3,20 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Anime Horizontal Scroll</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+
+   <section class="background">
+ 
     <nav class="navbar">
-                
-        <ul class="nav-menu">
-            <li><a tabindex="1" href="product.html">Product Page</a></li>
-            <li><a tabindex="2" href="pricing.html">Pricing Page</a></li>
-            <li><a tabindex="3" href="team.html">Team Page</a></li>
-           
-        </ul>
+        <div class="logo" onclick="toggleSidebar()" style="cursor: pointer;">
+            <h1><span class="purple">Ani</span>verse</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 256 256" fill="none" id="my-svg">
+                <defs>
+                    <linearGradient id="gradient1">
+                        <stop class="stop1" offset="0%" stop-color="#bb00ff"></stop>
+                        <stop class="stop2" offset="100%" stop-color="#3d12ff"></stop>
+                    </linearGradient>
+                </defs>
+                <rect id="backgr" width="256" height="256" fill="url(#gradient1)" rx="140"></rect>
+                <path d="M85.333 173.163V82.837a10.667 10.667 0 0 1 16.149 -9.141l75.275 45.163a10.667 10.667 0 0 1 0 18.283l-75.275 45.163A10.667 10.667 0 0 1 85.333 173.163Z" stroke="#fcf5ed" stroke-width="23" stroke-linecap="round" id="my-path" transform="translate(0,0) scale(1)"></path>
+            </svg>
+        </div>
+        
+
+        
+
+        
+        <div class="actions">
+                <div class="search">
+                    <input type="text" placeholder="Search" id="searchInput" oninput="searchAnime()">
+                    <img src="Icon.png"  alt="Search">
+                </div>
+            <img src="image.png" alt="Notifications" class="icon">
+            <img src="Ellipse 2.png" alt="User" class="avatar" onclick="ff()">
+        </div>
+        <div class="burger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         
     </nav>
-    
+     <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <h1 class="text1">Last what you saw</h1>
+
+<div class="anime-list" id="anidbList"></div>
+
+
+<h1 class="text">Most popular</h1>
+
+
+<div class="scroll-container" id="animeContainer"></div>
+<h1 class="text1">Best TV shows</h1>
+
+
+
+
+<div id="tvShowContainer" class="tv-show-list" ></div>
+
+<div class="anime-list" id="anidbList"></div>
+
+<footer>
+    <div class="footer-container">
+        <div class="social-icons">
+            <a href="#"><img src="free-outline-icons (4).svg" alt="YouTube"></a>
+            <a href="#"><img src="instagram.png" alt="Facebook"></a>
+            <a href="#"><img src="free-outline-icons (5).svg" alt="Instagram"></a>
+        </div>
+        
+        <div class="footer-links">
+            <div>
+                <a href="#">Audio Description</a>
+                <a href="#">Investor Relations</a>
+                <a href="#">Legal Notices</a>
+            </div>
+            <div>
+                <a href="#">Help Center</a>
+                <a href="#">Jobs</a>
+                <a href="#">Cookie Preferences</a>
+            </div>
+            <div>
+                <a href="#">Gift Cards</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Corporate Information</a>
+            </div>
+            <div>
+                <a href="#">Media Center</a>
+                <a href="#">Privacy</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+
+        <p class="copyright">Watch anime with leisure </p>
+    </div>
+   
+
+
+</footer>
+
+
+<script src="main.js"></script>
+
+</section>
 </body>
 </html>

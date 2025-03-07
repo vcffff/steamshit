@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аниме сайт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-theme {
+            background-color: #333;
+            color: #f4f4f4;
+        }
+
+        header {
+            background-color: #ff6f61;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-theme .container {
+            background-color: #444;
+            color: #f4f4f4;
+        }
+
+        .anime-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .anime-card:hover {
+            transform: scale(1.02);
+        }
+
+        .trailer-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .dark-theme .popup-content {
+            background-color: #444;
+            color: #f4f4f4;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff4a3d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать на аниме сайт!</h1>
+        <button id="theme-toggle">Переключить тему</button>
+    </header>
+
+    <div class="container">
+        <div id="random-anime">
+            <h2>Аниме дня:</h2>
+            <p><strong>Название:</strong> <span id="anime-title"></span></p>
+            <p><strong>Жанр:</strong> <span id="anime-genre"></span></p>
+            <p><strong>Рейтинг:</strong> <span id="anime-rating"></span></p>
+        </div>
+
+        <h2>Популярные аниме</h2>
+        <div class="anime-card" onclick="showTrailer('dQw4w9WgXcQ')">
+            <h3>Наруто</h3>
+            <p>Жанр: Сёнэн</p>
+            <p>Рейтинг: 8.5</p>
+        </div>
+        <div class="anime-card" onclick="showTrailer('dQw4w9WgXcQ')">
+            <h3>Атака титанов</h3>
+            <p>Жанр: Драма, Экшен</p>
+            <p>Рейтинг: 9.0</p>
+        </div>
+    </div>
+
+    <script>
+        // Массив с аниме
+        const animeList = [
+            { title: "Наруто", genre: "Сёнэн", rating: 8.5 },
+            { title: "Атака титанов", genre: "Драма, Экшен", rating: 9.0 },
+            { title: "Моя геройская академия", genre: "Сёнэн, Супергерои", rating: 8.7 },
+            { title: "Самурай Чамплу", genre: "Приключения, Комедия", rating: 8.3 },
+            { title: "Тетрадь смерти", genre: "Триллер, Мистика", rating: 8.8 }
+        ];
+
+        // Функция для выбора случайного аниме
+        function getRandomAnime() {
+            const randomIndex = Math.floor(Math.random() * animeList.length);
+            return animeList[randomIndex];
+        }
+
+        // Отображение случайного аниме на странице
+        function displayRandomAnime() {
+            const anime = getRandomAnime();
+            document.getElementById('anime-title').textContent = anime.title;
+            document.getElementById('anime-genre').textContent = anime.genre;
+            document.getElementById('anime-rating').textContent = anime.rating;
+        }
+
+        // Переключение темы
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+
+        // При загрузке страницы
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-theme');
+        }
+
+        // Показ трейлера
+        function showTrailer(videoId) {
+            const popup = document.createElement('div');
+            popup.className = 'trailer-popup';
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                    <button onclick="closeTrailer()">Закрыть</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        function closeTrailer() {
+            const popup = document.querySelector('.trailer-popup');
+            if (popup) {
+                popup.remove();
+            }
+        }
+
+        // Инициализация
+        window.onload = displayRandomAnime;
+    </script>
+</body>
+</html>
